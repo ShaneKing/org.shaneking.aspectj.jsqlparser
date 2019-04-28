@@ -27,8 +27,8 @@ public class SensitiveExpressionReplacerTest extends SKUnit {
 
   @Before
   public void setUp() throws Exception {
-    itemMap.put("T.A", Tuple.of(Sets.newHashSet(Joiner.on(String0.ARROW).join(SensitiveItemsFinder.PATH_OF_SELECT, SensitiveItemsFinder.PATH_OF_SELECT_EXPRESSION_ITEM)), "hash(", ")"));
-    tableMap.put("SCHEMA.TABLE", "(SELECT * FROM SCHEMA.TABLE)");
+    itemMap.put("t.a", Tuple.of(Sets.newHashSet(Joiner.on(String0.ARROW).join(SensitiveItemsFinder.PATH_OF_SELECT, SensitiveItemsFinder.PATH_OF_SELECT_EXPRESSION_ITEM)), "hash(", ")"));
+    tableMap.put("schema.table", "(select * from schema.table)");
   }
 
   @After
@@ -41,7 +41,7 @@ public class SensitiveExpressionReplacerTest extends SKUnit {
     Statement statement = CCJSqlParserUtil.parse("select t.a as ta,t.* from schema.table t");
     statement.accept(SensitiveStatementReplacerFactory.create(itemMap, sb, tableMap));
 //    System.out.println(sb);
-    Assert.assertEquals("SELECT hash(t.a) AS ta, t.* FROM (SELECT * FROM SCHEMA.TABLE) t", sb.toString());
+    Assert.assertEquals("SELECT hash(t.a) AS ta, t.* FROM (select * from schema.table) t", sb.toString());
   }
 
 }

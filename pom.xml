@@ -129,58 +129,58 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
       </plugin>
-      <!--      <plugin>-->
-      <!--        &lt;!&ndash;-->
-      <!--          REF1:-->
-      <!--            https://palesz.wordpress.com/2011/12/03/howto-maven-lombok-and-aspectj-together/-->
-      <!--            https://git.bitsensor.io/bitsensor/demo/java-demo/blob/master/webgoat-container/pom.xml-->
-      <!--        &ndash;&gt;-->
-      <!--        &lt;!&ndash;-->
-      <!--          REF2:-->
-      <!--            http://landcareweb.com/questions/23413/ru-he-rang-lombokhe-aspectjyi-qi-gong-zuo-->
-      <!--        &ndash;&gt;-->
-      <!--        &lt;!&ndash;-->
-      <!--          REF3:-->
-      <!--            https://github.com/rzwitserloot/lombok/issues/995#issuecomment-421081283-->
-      <!--        &ndash;&gt;-->
-      <!--        <groupId>com.github.m50d</groupId>-->
-      <!--        <artifactId>aspectj-maven-plugin</artifactId>-->
-      <!--        <version>1.11.1</version>-->
-      <!--        <dependencies>-->
-      <!--          <dependency>-->
-      <!--            <groupId>org.aspectj</groupId>-->
-      <!--            <artifactId>aspectjrt</artifactId>-->
-      <!--            <version>${org.aspectj_version}</version>-->
-      <!--          </dependency>-->
-      <!--          <dependency>-->
-      <!--            <groupId>org.aspectj</groupId>-->
-      <!--            <artifactId>aspectjtools</artifactId>-->
-      <!--            <version>${org.aspectj_version}</version>-->
-      <!--          </dependency>-->
-      <!--        </dependencies>-->
-      <!--        <configuration>-->
-      <!--          <complianceLevel>${maven.compile.target}</complianceLevel>-->
-      <!--          <source>${maven.compile.target}</source>-->
-      <!--          <target>${maven.compile.target}</target>-->
-      <!--          <showWeaveInfo>true</showWeaveInfo>-->
-      <!--          <verbose>true</verbose>-->
-      <!--          <Xlint>ignore</Xlint>-->
-      <!--          <encoding>${project.build.sourceEncoding}</encoding>-->
-      <!--          <forceAjcCompile>true</forceAjcCompile>-->
-      <!--          <sources/>&lt;!&ndash; this is important!&ndash;&gt;-->
-      <!--          <weaveDirectories>-->
-      <!--            <weaveDirectory>${project.build.directory}/classes</weaveDirectory>-->
-      <!--          </weaveDirectories>-->
-      <!--        </configuration>-->
-      <!--        <executions>-->
-      <!--          <execution>-->
-      <!--            <phase>process-classes</phase>-->
-      <!--            <goals>-->
-      <!--              <goal>compile</goal>-->
-      <!--            </goals>-->
-      <!--          </execution>-->
-      <!--        </executions>-->
-      <!--      </plugin>-->
+      <plugin>
+        <!--
+          REF1:
+            https://palesz.wordpress.com/2011/12/03/howto-maven-lombok-and-aspectj-together/
+            https://git.bitsensor.io/bitsensor/demo/java-demo/blob/master/webgoat-container/pom.xml
+        -->
+        <!--
+          REF2:
+            http://landcareweb.com/questions/23413/ru-he-rang-lombokhe-aspectjyi-qi-gong-zuo
+        -->
+        <!--
+          REF3:
+            https://github.com/rzwitserloot/lombok/issues/995#issuecomment-421081283
+        -->
+        <groupId>com.github.m50d</groupId>
+        <artifactId>aspectj-maven-plugin</artifactId>
+        <version>1.11.1</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${org.aspectj_version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>${org.aspectj_version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <complianceLevel>${maven.compile.target}</complianceLevel>
+          <source>${maven.compile.target}</source>
+          <target>${maven.compile.target}</target>
+          <showWeaveInfo>true</showWeaveInfo>
+          <verbose>true</verbose>
+          <Xlint>ignore</Xlint>
+          <encoding>${project.build.sourceEncoding}</encoding>
+          <forceAjcCompile>true</forceAjcCompile>
+          <sources/><!-- this is important!-->
+          <weaveDirectories>
+            <weaveDirectory>${project.build.directory}/classes</weaveDirectory>
+          </weaveDirectories>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>

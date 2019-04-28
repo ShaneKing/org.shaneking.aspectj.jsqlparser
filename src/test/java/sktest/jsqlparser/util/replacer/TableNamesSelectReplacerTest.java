@@ -20,7 +20,7 @@ public class TableNamesSelectReplacerTest extends SKUnit {
 
   @Before
   public void setUp() throws Exception {
-    tableMap.put("schema.table".toLowerCase(), "(SELECT * FROM schema.table)");
+    tableMap.put("schema.table".toLowerCase(), "(select * from schema.table)");
   }
 
   @After
@@ -33,7 +33,7 @@ public class TableNamesSelectReplacerTest extends SKUnit {
     Statement statement = CCJSqlParserUtil.parse("select t.*--comments\n from schema.table t");
     statement.accept(TableNamesStatementReplacerFactory.create(sb, tableMap));
 //    System.out.println(sb);
-    Assert.assertEquals("SELECT t.* FROM (SELECT * FROM schema.table) t", sb.toString());
+    Assert.assertEquals("SELECT t.* FROM (select * from schema.table) t", sb.toString());
   }
 
 }
