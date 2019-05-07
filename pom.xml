@@ -6,15 +6,16 @@
   <parent>
     <groupId>org.shaneking</groupId>
     <artifactId>org.shaneking.parent</artifactId>
-    <version>0.0.4</version>
+    <version>${revision.parent}</version>
+    <relativePath>../org.shaneking.parent</relativePath>
   </parent>
 
   <artifactId>org.shaneking.jsqlparser</artifactId>
-  <version>0.0.1</version>
+  <version>${project.parent.version}</version>
   <packaging>jar</packaging>
 
-  <name>JSqlParser</name>
-  <description>JSqlParser for ShaneKing</description>
+  <name>JSqlParser for ShaneKing</name>
+  <description>Sql Parser Utils for ShaneKing</description>
   <url>https://github.com/ShaneKing/org.shaneking.jsqlparser</url>
   <inceptionYear>2011-2019</inceptionYear>
 
@@ -107,12 +108,12 @@
     <dependency>
       <groupId>org.shaneking</groupId>
       <artifactId>org.shaneking.aspectj</artifactId>
-      <version>0.0.2</version>
+      <version>${project.parent.version}</version>
     </dependency>
     <dependency>
       <groupId>org.shaneking</groupId>
       <artifactId>org.shaneking.skava</artifactId>
-      <version>0.1.3</version>
+      <version>${project.parent.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
