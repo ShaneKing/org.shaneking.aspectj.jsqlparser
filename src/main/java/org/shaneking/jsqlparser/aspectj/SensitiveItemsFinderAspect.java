@@ -15,6 +15,8 @@ import net.sf.jsqlparser.statement.truncate.Truncate;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.shaneking.jsqlparser.annotation.SensitiveItemsFinderPath;
 import org.shaneking.jsqlparser.util.SensitiveItemsFinder;
 import org.shaneking.skava.ling.collect.Tuple;
 import org.shaneking.skava.ling.lang.String0;
@@ -25,7 +27,10 @@ import java.util.Set;
 @Aspect
 public class SensitiveItemsFinderAspect {
 
-  //    @Around("execution(* org.shaneking.jsqlparser.annotation.SensitiveItemsFinder.visit(..))")
+  @Pointcut("execution(@org.shaneking.jsqlparser.annotation.SensitiveItemsFinderPath * *..*.*(..))")
+  private void pointcut() {
+  }
+
   //0
   @Around("@annotation(org.shaneking.jsqlparser.annotation.SensitiveItemsFinderTransformed)")
   public Object aroundTransformed(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -69,8 +74,8 @@ public class SensitiveItemsFinderAspect {
   }
 
   //1
-  @Around("@annotation(org.shaneking.jsqlparser.annotation.SensitiveItemsFinderPath)")
-  public Object aroundPath(ProceedingJoinPoint joinPoint) throws Throwable {
+  @Around("pointcut() && @annotation(path)")
+  public Object aroundPath(ProceedingJoinPoint joinPoint, SensitiveItemsFinderPath path) throws Throwable {
     Object originInstance = joinPoint.getThis();
     if (originInstance == null) {
       originInstance = joinPoint.getTarget();
@@ -79,24 +84,28 @@ public class SensitiveItemsFinderAspect {
     Object arg0 = joinPoint.getArgs()[0];
     if (originInstance instanceof SensitiveItemsFinder) {
       sensitiveItemsFinder = (SensitiveItemsFinder) originInstance;
-      if (arg0 instanceof Select) {
-        sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_SELECT);
-      } else if (arg0 instanceof SelectExpressionItem) {
-        sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_SELECT_EXPRESSION_ITEM);
-      } else if (arg0 instanceof SubSelect) {
-        sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_SUB_SELECT);
-      } else if (arg0 instanceof WithItem) {
-        sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_WITH_ITEM);
-      } else if (arg0 instanceof SubJoin) {
-        sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_FROM_ITEM);
-      } else if (arg0 instanceof LateralSubSelect) {
-        sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_FROM_ITEM);
-      } else if (arg0 instanceof ParenthesisFromItem) {
-        sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_FROM_ITEM);
-      } else if (arg0 instanceof Insert) {
-        sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_INSERT);
-      } else if (arg0 instanceof Truncate) {
-        sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_TRUNCATE);
+      if (path == null || Strings.isNullOrEmpty(path.value())) {
+        if (arg0 instanceof Select) {
+          sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_SELECT);
+        } else if (arg0 instanceof SelectExpressionItem) {
+          sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_SELECT_EXPRESSION_ITEM);
+        } else if (arg0 instanceof SubSelect) {
+          sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_SUB_SELECT);
+        } else if (arg0 instanceof WithItem) {
+          sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_WITH_ITEM);
+        } else if (arg0 instanceof SubJoin) {
+          sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_FROM_ITEM);
+        } else if (arg0 instanceof LateralSubSelect) {
+          sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_FROM_ITEM);
+        } else if (arg0 instanceof ParenthesisFromItem) {
+          sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_FROM_ITEM);
+        } else if (arg0 instanceof Insert) {
+          sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_INSERT);
+        } else if (arg0 instanceof Truncate) {
+          sensitiveItemsFinder.getPathStack().push(SensitiveItemsFinder.PATH_OF_TRUNCATE);
+        }
+      } else {
+        sensitiveItemsFinder.getPathStack().push(path.value());
       }
     }
     Object result = joinPoint.proceed();

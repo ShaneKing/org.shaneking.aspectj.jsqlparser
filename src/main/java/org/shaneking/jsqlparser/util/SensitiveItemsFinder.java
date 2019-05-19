@@ -103,7 +103,7 @@ import java.util.stream.Collectors;
  */
 public class SensitiveItemsFinder implements SelectVisitor, FromItemVisitor, ExpressionVisitor, ItemsListVisitor, SelectItemVisitor, StatementVisitor {
 
-  public static final String PATH_OF_FROM_ITEM = "FromItem";
+  public static final String PATH_OF_FROM_ITEM = "FromItem";//LateralSubSelect|ParenthesisFromItem|SubJoin
   public static final String PATH_OF_INSERT = "Insert";
   public static final String PATH_OF_SELECT = "Select";
   public static final String PATH_OF_SELECT_EXPRESSION_ITEM = "SelectExpressionItem";
