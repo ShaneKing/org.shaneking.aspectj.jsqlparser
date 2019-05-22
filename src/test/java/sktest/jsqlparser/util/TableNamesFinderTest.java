@@ -14,8 +14,6 @@ import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.update.Update;
 import net.sf.jsqlparser.statement.upsert.Upsert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.shaneking.aspectj.AspectJUnit4Runner;
 import org.shaneking.jsqlparser.util.TableNamesFinder;
 import org.shaneking.skava.ling.collect.Tuple;
 import sktest.jsqlparser.SKUnit;
@@ -26,7 +24,6 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
-@RunWith(AspectJUnit4Runner.class)
 public class TableNamesFinderTest extends SKUnit {
 
   private static CCJSqlParserManager pm = new CCJSqlParserManager();

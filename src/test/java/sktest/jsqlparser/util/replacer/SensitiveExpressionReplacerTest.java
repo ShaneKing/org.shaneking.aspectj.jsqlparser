@@ -9,8 +9,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.shaneking.aspectj.AspectJUnit4Runner;
 import org.shaneking.jsqlparser.util.SensitiveItemsFinder;
 import org.shaneking.jsqlparser.util.replacer.SensitiveStatementReplacerFactory;
 import org.shaneking.skava.ling.collect.Tuple;
@@ -20,7 +18,6 @@ import sktest.jsqlparser.SKUnit;
 import java.util.Map;
 import java.util.Set;
 
-@RunWith(AspectJUnit4Runner.class)
 public class SensitiveExpressionReplacerTest extends SKUnit {
   Map<String, Tuple.Triple<Set<String>, String, String>> itemMap = Maps.newHashMap();
   Map<String, String> tableMap = Maps.newHashMap();

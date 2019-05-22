@@ -14,8 +14,6 @@ import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.update.Update;
 import net.sf.jsqlparser.statement.upsert.Upsert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.shaneking.aspectj.AspectJUnit4Runner;
 import org.shaneking.jsqlparser.util.SensitiveItemsFinder;
 import org.shaneking.skava.ling.collect.Tuple;
 import sktest.jsqlparser.SKUnit;
@@ -27,7 +25,6 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-@RunWith(AspectJUnit4Runner.class)
 public class SensitiveItemsFinderTest extends SKUnit {
 
   private static CCJSqlParserManager pm = new CCJSqlParserManager();

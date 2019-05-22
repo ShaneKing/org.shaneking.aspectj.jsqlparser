@@ -7,14 +7,11 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.shaneking.aspectj.AspectJUnit4Runner;
 import org.shaneking.jsqlparser.util.replacer.TableNamesStatementReplacerFactory;
 import sktest.jsqlparser.SKUnit;
 
 import java.util.Map;
 
-@RunWith(AspectJUnit4Runner.class)
 public class TableNamesSelectReplacerTest extends SKUnit {
   Map<String, String> tableMap = Maps.newHashMap();
 
