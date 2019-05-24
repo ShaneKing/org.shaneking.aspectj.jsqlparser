@@ -35,7 +35,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(CCJSqlParserUtil.parse(sql));
     assertEquals(1, itemMap.size());
-    assertEquals("{t2=([t],{c=[(t,c,[Select→WithItem→SelectExpressionItem],false)], *=[(t,c,[Select→WithItem→SelectExpressionItem, Select→SubSelect→WithItem, Select, Select→SubSelect, Select→WithItem],false)]})}", itemMap.toString());
+    assertEquals("{t2=[[t],{c=[[t,c,[Select→WithItem→SelectExpressionItem],false]], *=[[t,c,[Select→WithItem→SelectExpressionItem, Select→SubSelect→WithItem, Select, Select→SubSelect, Select→WithItem],false]]}]}", itemMap.toString());
   }
 
   @Test
@@ -44,7 +44,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(CCJSqlParserUtil.parse(sql));
     assertEquals(3, itemMap.size());
-    assertEquals("{a=([mysql.user],{c3=[(mysql.user,host1,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem→SubSelect→SelectExpressionItem],true)], host1=[(mysql.user,host1,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem→SubSelect→SelectExpressionItem],true)]}), b=([mysql.user],{c3=[(mysql.user,host2,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem→SubSelect→SelectExpressionItem],true)], host2=[(mysql.user,host2,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem→SubSelect→SelectExpressionItem],true)]}), c=([mysql.user],{c3=[(mysql.user,host3,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem→SubSelect→SelectExpressionItem],true)], host3=[(mysql.user,host3,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem→SubSelect→SelectExpressionItem],true)]})}", itemMap.toString());
+    assertEquals("{a=[[mysql.user],{c3=[[mysql.user,host1,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem→SubSelect→SelectExpressionItem],true]], host1=[[mysql.user,host1,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem→SubSelect→SelectExpressionItem],true]]}], b=[[mysql.user],{c3=[[mysql.user,host2,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem→SubSelect→SelectExpressionItem],true]], host2=[[mysql.user,host2,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem→SubSelect→SelectExpressionItem],true]]}], c=[[mysql.user],{c3=[[mysql.user,host3,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem→SubSelect→SelectExpressionItem],true]], host3=[[mysql.user,host3,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem→SubSelect→SelectExpressionItem],true]]}]}", itemMap.toString());
   }
 
   //TODO
@@ -54,7 +54,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(CCJSqlParserUtil.parse(sql));
     assertEquals(1, itemMap.size());
-    assertEquals("{t=([tab1, tab2],{a=[(tab1,a,[Select→SubSelect→SelectExpressionItem, Select→SelectExpressionItem],true)], m=[(tab2,m,[Select→SubSelect→SelectExpressionItem],false)]})}", itemMap.toString());
+    assertEquals("{t=[[tab1, tab2],{a=[[tab1,a,[Select→SubSelect→SelectExpressionItem, Select→SelectExpressionItem],true]], m=[[tab2,m,[Select→SubSelect→SelectExpressionItem],false]]}]}", itemMap.toString());
   }
 
   @Test
@@ -72,7 +72,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
       SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
       Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(selectStatement);
       assertEquals(4, itemMap.size());
-      assertEquals("{my_table4=([my_table4],{}), *=([my_table3],{*=[(my_table3,*,[Select→SubSelect],false)]}), mt1=([my_table1],{*=[(my_table1,*,[Select],false)]}), my_table2=([my_table2],{})}", itemMap.toString());
+      assertEquals("{my_table4=[[my_table4],{}], *=[[my_table3],{*=[[my_table3,*,[Select→SubSelect],false]]}], mt1=[[my_table1],{*=[[my_table1,*,[Select],false]]}], my_table2=[[my_table2],{}]}", itemMap.toString());
     }
 
   }
@@ -86,7 +86,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(selectStatement);
     assertEquals(1, itemMap.size());
-    assertEquals("{alias_table1=([my_table1],{*=[(my_table1,*,[Select],false)]})}", itemMap.toString());
+    assertEquals("{alias_table1=[[my_table1],{*=[[my_table1,*,[Select],false]]}]}", itemMap.toString());
 
   }
 
@@ -99,7 +99,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(selectStatement);
     assertEquals(1, itemMap.size());
-    assertEquals("{teststmt=([my_table1],{*=[(my_table1,*,[Select, Select→WithItem],false)]})}", itemMap.toString());
+    assertEquals("{teststmt=[[my_table1],{*=[[my_table1,*,[Select, Select→WithItem],false]]}]}", itemMap.toString());
   }
 
   @Test
@@ -111,7 +111,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(selectStatement);
     assertEquals(2, itemMap.size());
-    assertEquals("{al=([my_table2],{a=[(my_table2,a,[Select→FromItem→SubSelect→SelectExpressionItem],false)], *=[(my_table2,a,[Select, Select→FromItem→SubSelect→SelectExpressionItem],false)]}), my_table1=([my_table1],{})}", itemMap.toString());
+    assertEquals("{al=[[my_table2],{a=[[my_table2,a,[Select→FromItem→SubSelect→SelectExpressionItem],false]], *=[[my_table2,a,[Select, Select→FromItem→SubSelect→SelectExpressionItem],false]]}], my_table1=[[my_table1],{}]}", itemMap.toString());
   }
 
   @Test(expected = UnsupportedOperationException.class)
@@ -159,7 +159,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(insertStatement);
     assertEquals(1, itemMap.size());
-    assertEquals("{*=([my_table2],{a=[(my_table2,a,[Insert→SubSelect→SelectExpressionItem],false)]})}", itemMap.toString());
+    assertEquals("{*=[[my_table2],{a=[[my_table2,a,[Insert→SubSelect→SelectExpressionItem],false]]}]}", itemMap.toString());
   }
 
   @Test
@@ -231,7 +231,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(selectStatement);
     assertEquals(2, itemMap.size());
-    assertEquals("{tbl0=([tbl0],{name=[(tbl0,name,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem],false)]}), tbl=([tbl],{bc_id=[(tbl,original_id,[Select→SelectExpressionItem],false)], original_id=[(tbl,original_id,[Select→SelectExpressionItem],false)], cid=[(tbl,cid,[Select→SelectExpressionItem],false)]})}", itemMap.toString());
+    assertEquals("{tbl0=[[tbl0],{name=[[tbl0,name,[Select→SelectExpressionItem→SubSelect→SelectExpressionItem],false]]}], tbl=[[tbl],{bc_id=[[tbl,original_id,[Select→SelectExpressionItem],false]], original_id=[[tbl,original_id,[Select→SelectExpressionItem],false]], cid=[[tbl,cid,[Select→SelectExpressionItem],false]]}]}", itemMap.toString());
   }
 
   @Test
@@ -243,7 +243,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(insertStatement);
     assertEquals(1, itemMap.size());
-    assertEquals("{mytable2=([mytable2],{mycolumn=[(mytable2,mycolumn,[Insert→Select→SelectExpressionItem],false)]})}", itemMap.toString());
+    assertEquals("{mytable2=[[mytable2],{mycolumn=[[mytable2,mycolumn,[Insert→Select→SelectExpressionItem],false]]}]}", itemMap.toString());
   }
 
   @Test(expected = UnsupportedOperationException.class)
@@ -265,7 +265,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(insert);
     assertEquals(1, itemMap.size());
-    assertEquals("{suppliers=([suppliers],{country=[(suppliers,country,[Insert→Select→SelectExpressionItem],false)], suppliername=[(suppliers,suppliername,[Insert→Select→SelectExpressionItem],false)]})}", itemMap.toString());
+    assertEquals("{suppliers=[[suppliers],{country=[[suppliers,country,[Insert→Select→SelectExpressionItem],false]], suppliername=[[suppliers,suppliername,[Insert→Select→SelectExpressionItem],false]]}]}", itemMap.toString());
   }
 
   @Test
@@ -275,7 +275,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(expr);
     assertEquals(2, itemMap.size());
-    assertEquals("{*=([mytable],{col2=[(mytable,col2,[SubSelect→SelectExpressionItem],false)]}), table=([table],{mycol=[(table,mycol,[],false)]})}", itemMap.toString());
+    assertEquals("{*=[[mytable],{col2=[[mytable,col2,[SubSelect→SelectExpressionItem],false]]}], table=[[table],{mycol=[[table,mycol,[],false]]}]}", itemMap.toString());
   }
 
   @Test
@@ -294,7 +294,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     };
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(select);
     assertNull(holder[0]);
-    assertEquals("{mytable=([mytable],{col2=[(mytable,col2,[Select→SelectExpressionItem],false)]})}", itemMap.toString());
+    assertEquals("{mytable=[[mytable],{col2=[[mytable,col2,[Select→SelectExpressionItem],false]]}]}", itemMap.toString());
   }
 
   @Test
@@ -316,7 +316,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(selectStatement);
     assertEquals(2, itemMap.size());
-    assertEquals("{dual=([dual],{}), test1=([test1],{})}", itemMap.toString());
+    assertEquals("{dual=[[dual],{}], test1=[[test1],{}]}", itemMap.toString());
   }
 
   @Test(expected = UnsupportedOperationException.class)
@@ -379,7 +379,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(stmt);
     assertEquals(1, itemMap.size());
-    assertEquals("{mytable2=([mytable2],{})}", itemMap.toString());
+    assertEquals("{mytable2=[[mytable2],{}]}", itemMap.toString());
   }
 
   @Test
@@ -389,7 +389,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(stmt);
     assertEquals(1, itemMap.size());
-    assertEquals("{mytable2=([mytable2],{})}", itemMap.toString());
+    assertEquals("{mytable2=[[mytable2],{}]}", itemMap.toString());
   }
 
   @Test
@@ -399,7 +399,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(stmt);
     assertEquals(1, itemMap.size());
-    assertEquals("{mytable2=([mytable2],{})}", itemMap.toString());
+    assertEquals("{mytable2=[[mytable2],{}]}", itemMap.toString());
   }
 
   @Test
@@ -407,7 +407,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder finder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = finder.findItemMap(CCJSqlParserUtil.parseCondExpression("SOME_TABLE.COLUMN = 'A'"));
     assertEquals(1, itemMap.size());
-    assertEquals("{some_table=([some_table],{column=[(some_table,column,[],false)]})}", itemMap.toString());
+    assertEquals("{some_table=[[some_table],{column=[[some_table,column,[],false]]}]}", itemMap.toString());
   }
 
   @Test
@@ -419,7 +419,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(selectStmt);
     assertEquals(1, itemMap.size());
-    assertEquals("{table1=([table1],{*=[(table1,*,[Select],false)]})}", itemMap.toString());
+    assertEquals("{table1=[[table1],{*=[[table1,*,[Select],false]]}]}", itemMap.toString());
   }
 
   @Test
@@ -428,7 +428,7 @@ public class SensitiveItemsFinderTest extends SKUnit {
     SensitiveItemsFinder finder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = finder.findItemMap(CCJSqlParserUtil.parse(sql));
     assertEquals(1, itemMap.size());
-    assertEquals("{table1=([table1],{*=[(table1,*,[Select],false)]})}", itemMap.toString());
+    assertEquals("{table1=[[table1],{*=[[table1,*,[Select],false]]}]}", itemMap.toString());
   }
 
   @Test(expected = UnsupportedOperationException.class)
