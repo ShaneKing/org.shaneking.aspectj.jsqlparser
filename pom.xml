@@ -4,19 +4,19 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.shaneking</groupId>
-    <artifactId>org.shaneking</artifactId>
-    <version>0.2.2</version>
-    <relativePath>../org.shaneking</relativePath>
+    <groupId>org.shaneking.aspectj</groupId>
+    <artifactId>org.shaneking.aspectj</artifactId>
+    <version>0.4.0</version>
+    <relativePath>../org.shaneking.aspectj</relativePath>
   </parent>
 
-  <artifactId>org.shaneking.jsqlparser</artifactId>
+  <artifactId>org.shaneking.aspectj.jsqlparser</artifactId>
   <version>${project.parent.version}</version>
   <packaging>jar</packaging>
 
-  <name>JSqlParser for ShaneKing</name>
-  <description>Sql Parser Utils for ShaneKing</description>
-  <url>https://github.com/ShaneKing/org.shaneking.jsqlparser</url>
+  <name>AspectJ JSqlParser for ShaneKing</name>
+  <description>AspectJ JSqlParser for ShaneKing</description>
+  <url>https://github.com/ShaneKing/org.shaneking.aspectj.jsqlparser</url>
   <inceptionYear>2011-2019</inceptionYear>
 
   <organization>
@@ -66,17 +66,17 @@
   </contributors>
 
   <scm>
-    <connection>scm:git:git@github.com:ShaneKing/org.shaneking.jsqlparser.git</connection>
-    <developerConnection>scm:git:git@github.com:ShaneKing/org.shaneking.jsqlparser.git</developerConnection>
-    <url>git@github.com:ShaneKing/org.shaneking.jsqlparser.git</url>
+    <connection>scm:git:git@github.com:ShaneKing/org.shaneking.aspectj.jsqlparser.git</connection>
+    <developerConnection>scm:git:git@github.com:ShaneKing/org.shaneking.aspectj.jsqlparser.git</developerConnection>
+    <url>git@github.com:ShaneKing/org.shaneking.aspectj.jsqlparser.git</url>
   </scm>
   <issueManagement>
     <system>Github</system>
-    <url>https://github.com/ShaneKing/org.shaneking.jsqlparser/issues</url>
+    <url>https://github.com/ShaneKing/org.shaneking.aspectj.jsqlparser/issues</url>
   </issueManagement>
   <ciManagement>
     <system>Travis-CI</system>
-    <url>https://travis-ci.org/ShaneKing/org.shaneking.jsqlparser</url>
+    <url>https://travis-ci.org/ShaneKing/org.shaneking.aspectj.jsqlparser</url>
   </ciManagement>
 
   <dependencies>
@@ -106,18 +106,18 @@
       <artifactId>lombok</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.shaneking</groupId>
-      <artifactId>org.shaneking.aspectj</artifactId>
-      <version>${project.parent.version}</version>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
     </dependency>
     <dependency>
       <groupId>org.shaneking</groupId>
       <artifactId>org.shaneking.skava</artifactId>
-      <version>${project.parent.version}</version>
+      <version>${skVersion}</version>
     </dependency>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
+      <groupId>org.shaneking.aspectj</groupId>
+      <artifactId>org.shaneking.aspectj.helper</artifactId>
+      <version>${project.parent.version}</version>
     </dependency>
   </dependencies>
   <build>

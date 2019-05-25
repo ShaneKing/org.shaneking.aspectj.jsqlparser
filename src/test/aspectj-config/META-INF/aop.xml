@@ -1,0 +1,19 @@
+<aspectj>
+  <aspects>
+    <aspect name="org.shaneking.aspectj.jsqlparser.aspectj.SensitiveExpressionReplacerAspect"/>
+    <aspect name="org.shaneking.aspectj.jsqlparser.aspectj.SensitiveItemsFinderAspect"/>
+  </aspects>
+  <weaver>
+    <include within="org.shaneking.aspectj.jsqlparser.aspectj.SensitiveExpressionReplacerAspect"/>
+    <include within="org.shaneking.aspectj.jsqlparser.aspectj.SensitiveItemsFinderAspect"/>
+    <include within="org.shaneking.aspectj.jsqlparser.util.replacer.SensitiveExpressionReplacer"/>
+    <include within="org.shaneking.aspectj.jsqlparser.util.replacer.SensitiveStatementReplacer"/>
+    <include within="org.shaneking.aspectj.jsqlparser.util.replacer.TableNamesSelectReplacer"/>
+    <include within="org.shaneking.aspectj.jsqlparser.util.SensitiveItemsFinder"/>
+    <include within="org.shaneking.aspectj.jsqlparser.util.TableNamesFinder"/>
+    <include within="sktest.aspectj.jsqlparser.util.replacer.SensitiveExpressionReplacerTest"/>
+    <include within="sktest.aspectj.jsqlparser.util.replacer.TableNamesSelectReplacerTest"/>
+    <include within="sktest.aspectj.jsqlparser.util.SensitiveItemsFinderTest"/>
+    <include within="sktest.aspectj.jsqlparser.util.TableNamesFinderTest"/>
+  </weaver>
+</aspectj>
