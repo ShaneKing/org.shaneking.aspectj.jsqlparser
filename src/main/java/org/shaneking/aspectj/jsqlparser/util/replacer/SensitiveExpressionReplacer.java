@@ -16,8 +16,8 @@ import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.SubSelect;
 import net.sf.jsqlparser.util.deparser.ExpressionDeParser;
 import org.shaneking.aspectj.jsqlparser.annotation.SensitiveExpressionReplacerPath;
-import org.shaneking.skava.ling.collect.Tuple;
 import org.shaneking.skava.ling.lang.String0;
+import org.shaneking.skava.sk.collect.Tuple;
 
 import java.util.Map;
 import java.util.Set;

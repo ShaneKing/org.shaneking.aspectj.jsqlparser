@@ -11,8 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.shaneking.aspectj.jsqlparser.util.SensitiveItemsFinder;
 import org.shaneking.aspectj.jsqlparser.util.replacer.SensitiveStatementReplacerFactory;
-import org.shaneking.skava.ling.collect.Tuple;
 import org.shaneking.skava.ling.lang.String0;
+import org.shaneking.skava.sk.collect.Tuple;
 import sktest.aspectj.jsqlparser.SKUnit;
 
 import java.util.Map;

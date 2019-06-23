@@ -7,7 +7,7 @@
 package org.shaneking.aspectj.jsqlparser.util.replacer;
 
 import net.sf.jsqlparser.util.deparser.StatementDeParser;
-import org.shaneking.skava.ling.collect.Tuple;
+import org.shaneking.skava.sk.collect.Tuple;
 
 import java.util.Map;
 import java.util.Set;

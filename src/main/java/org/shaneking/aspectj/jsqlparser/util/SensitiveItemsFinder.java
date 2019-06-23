@@ -43,8 +43,8 @@ import org.shaneking.aspectj.jsqlparser.annotation.SensitiveItemsFinderAlias;
 import org.shaneking.aspectj.jsqlparser.annotation.SensitiveItemsFinderAsterisk;
 import org.shaneking.aspectj.jsqlparser.annotation.SensitiveItemsFinderPath;
 import org.shaneking.aspectj.jsqlparser.annotation.SensitiveItemsFinderTransformed;
-import org.shaneking.skava.ling.collect.Tuple;
 import org.shaneking.skava.ling.lang.String0;
+import org.shaneking.skava.sk.collect.Tuple;
 
 import java.util.*;
 import java.util.stream.Collectors;

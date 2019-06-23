@@ -33,7 +33,7 @@ import net.sf.jsqlparser.statement.truncate.Truncate;
 import net.sf.jsqlparser.statement.update.Update;
 import net.sf.jsqlparser.statement.upsert.Upsert;
 import net.sf.jsqlparser.statement.values.ValuesStatement;
-import org.shaneking.skava.ling.collect.Tuple;
+import org.shaneking.skava.sk.collect.Tuple;
 
 import java.util.Set;
 

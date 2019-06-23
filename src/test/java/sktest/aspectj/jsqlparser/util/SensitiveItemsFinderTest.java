@@ -15,7 +15,7 @@ import net.sf.jsqlparser.statement.update.Update;
 import net.sf.jsqlparser.statement.upsert.Upsert;
 import org.junit.Test;
 import org.shaneking.aspectj.jsqlparser.util.SensitiveItemsFinder;
-import org.shaneking.skava.ling.collect.Tuple;
+import org.shaneking.skava.sk.collect.Tuple;
 import sktest.aspectj.jsqlparser.SKUnit;
 
 import java.io.StringReader;
