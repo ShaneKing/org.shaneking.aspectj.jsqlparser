@@ -15,7 +15,7 @@
   <packaging>jar</packaging>
 
   <name>AspectJ JSqlParser for ShaneKing</name>
-  <description>AspectJ JSqlParser for ShaneKing</description>
+  <description>AspectJ JSqlParser For ShaneKing</description>
   <url>https://github.com/ShaneKing/org.shaneking.aspectj.jsqlparser</url>
   <inceptionYear>2011-2019</inceptionYear>
 
