@@ -41,12 +41,12 @@ public class SensitiveExpressionReplacerAspect {
       handlePathStack = ((SensitiveExpressionReplacer) originInstance).getPathStack();
     } else if (originInstance instanceof TableNamesSelectReplacer) {
       ExpressionVisitor expressionVisitor = ((TableNamesSelectReplacer) originInstance).getExpressionVisitor();
-      if (expressionVisitor != null && expressionVisitor instanceof SensitiveExpressionReplacer) {
+      if (expressionVisitor instanceof SensitiveExpressionReplacer) {
         handlePathStack = ((SensitiveExpressionReplacer) expressionVisitor).getPathStack();
       }
     } else if (originInstance instanceof SensitiveStatementReplacer) {
       ExpressionVisitor expressionVisitor = ((SensitiveStatementReplacer) originInstance).getExpressionReplacer();
-      if (expressionVisitor != null && expressionVisitor instanceof SensitiveExpressionReplacer) {
+      if (expressionVisitor instanceof SensitiveExpressionReplacer) {
         handlePathStack = ((SensitiveExpressionReplacer) expressionVisitor).getPathStack();
       }
     }

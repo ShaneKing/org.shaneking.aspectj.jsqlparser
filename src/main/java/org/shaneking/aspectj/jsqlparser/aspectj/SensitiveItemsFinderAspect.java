@@ -130,7 +130,7 @@ public class SensitiveItemsFinderAspect {
     }
     Object arg0 = joinPoint.getArgs()[0];
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> handleItemMap = null;
-    if (arg0 instanceof SubJoin || arg0 instanceof LateralSubSelect || arg0 instanceof ParenthesisFromItem) {
+    if (sensitiveItemsFinder != null && (arg0 instanceof SubJoin || arg0 instanceof LateralSubSelect || arg0 instanceof ParenthesisFromItem)) {
       handleItemMap = sensitiveItemsFinder.getItemMap();
       sensitiveItemsFinder.setItemMap(Maps.newHashMap());
     }
