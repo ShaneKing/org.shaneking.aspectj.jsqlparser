@@ -12,8 +12,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.shaneking.aspectj.jsqlparser.annotation.SensitiveItemsFinderPath;
 import org.shaneking.aspectj.jsqlparser.util.SensitiveItemsFinder;
-import org.shaneking.skava.ling.lang.String0;
-import org.shaneking.skava.sk.collect.Tuple;
+import org.shaneking.skava.lang.String0;
+import org.shaneking.skava.persistence.Tuple;
 
 import java.util.Map;
 import java.util.Set;

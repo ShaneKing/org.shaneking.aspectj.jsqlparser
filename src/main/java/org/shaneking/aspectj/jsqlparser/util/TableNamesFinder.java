@@ -27,7 +27,7 @@ import net.sf.jsqlparser.statement.truncate.Truncate;
 import net.sf.jsqlparser.statement.update.Update;
 import net.sf.jsqlparser.statement.upsert.Upsert;
 import net.sf.jsqlparser.statement.values.ValuesStatement;
-import org.shaneking.skava.sk.collect.Tuple;
+import org.shaneking.skava.persistence.Tuple;
 
 import java.util.Set;
 
@@ -37,6 +37,7 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
   //Tuple.Pair<schema.table, alias>
   private Set<Tuple.Pair<String, String>> tables;
   private boolean allowColumnProcessing = false;
+
   private Set<String> otherItemNames;
 
   public Set<Tuple.Pair<String, String>> findTableSet(Statement statement) {
@@ -66,7 +67,7 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
 
   @Override
   public void visit(WithItem withItem) {
-    otherItemNames.add(withItem.getName().toLowerCase());
+    this.otherItemNames.add(withItem.getName().toLowerCase());
     withItem.getSelectBody().accept(this);
   }
 
@@ -103,7 +104,7 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
   /*
    * Override to adapt the tableName generation (e.g. with / without schema).
    */
-  private String extractTableName(Table table) {
+  protected String extractTableName(Table table) {
     return table.getFullyQualifiedName();
   }
 
@@ -156,6 +157,11 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
   }
 
   @Override
+  public void visit(IntegerDivision division) {
+    visitBinaryExpression(division);
+  }
+
+  @Override
   public void visit(DoubleValue doubleValue) {
   }
 
@@ -193,12 +199,20 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
   }
 
   @Override
+  public void visit(FullTextSearch fullTextSearch) {
+  }
+
+  @Override
   public void visit(SignedExpression signedExpression) {
     signedExpression.getExpression().accept(this);
   }
 
   @Override
   public void visit(IsNullExpression isNullExpression) {
+  }
+
+  @Override
+  public void visit(IsBooleanExpression isBooleanExpression) {
   }
 
   @Override
@@ -277,7 +291,7 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
     visitBinaryExpression(expr);
   }
 
-  private void visitBinaryExpression(BinaryExpression binaryExpression) {
+  public void visitBinaryExpression(BinaryExpression binaryExpression) {
     binaryExpression.getLeftExpression().accept(this);
     binaryExpression.getRightExpression().accept(this);
   }
@@ -524,8 +538,11 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
 
   @Override
   public void visit(Update update) {
-    for (Table table : update.getTables()) {
-      visit(table);
+    visit(update.getTable());
+    if (update.getStartJoins() != null) {
+      for (Join join : update.getStartJoins()) {
+        join.getRightItem().accept(this);
+      }
     }
     if (update.getExpressions() != null) {
       for (Expression expression : update.getExpressions()) {
@@ -621,7 +638,7 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
   }
 
   @Override
-  public void visit(ShowStatement set) {
+  public void visit(ShowColumnsStatement set) {
     throw new UnsupportedOperationException(NOT_SUPPORTED_YET);
   }
 
@@ -738,5 +755,24 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
   @Override
   public void visit(CollateExpression col) {
     col.getLeftExpression().accept(this);
+  }
+
+  @Override
+  public void visit(ShowStatement aThis) {
+  }
+
+  @Override
+  public void visit(SimilarToExpression expr) {
+    visitBinaryExpression(expr);
+  }
+
+  @Override
+  public void visit(DeclareStatement aThis) {
+  }
+
+  @Override
+  public void visit(ArrayExpression array) {
+    array.getObjExpression().accept(this);
+    array.getIndexExpression().accept(this);
   }
 }

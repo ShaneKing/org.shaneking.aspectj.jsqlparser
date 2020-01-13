@@ -37,8 +37,8 @@ import org.shaneking.aspectj.jsqlparser.annotation.SensitiveItemsFinderAlias;
 import org.shaneking.aspectj.jsqlparser.annotation.SensitiveItemsFinderAsterisk;
 import org.shaneking.aspectj.jsqlparser.annotation.SensitiveItemsFinderPath;
 import org.shaneking.aspectj.jsqlparser.annotation.SensitiveItemsFinderTransformed;
-import org.shaneking.skava.ling.lang.String0;
-import org.shaneking.skava.sk.collect.Tuple;
+import org.shaneking.skava.lang.String0;
+import org.shaneking.skava.persistence.Tuple;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -499,6 +499,11 @@ public class SensitiveItemsFinder implements SelectVisitor, FromItemVisitor, Exp
   }
 
   @Override
+  public void visit(IntegerDivision division) {
+    visitBinaryExpression(division);
+  }
+
+  @Override
   public void visit(DoubleValue doubleValue) {
     //no column, ignore
   }
@@ -538,6 +543,10 @@ public class SensitiveItemsFinder implements SelectVisitor, FromItemVisitor, Exp
     inExpression.getRightItemsList().accept(this);
   }
 
+  @Override
+  public void visit(FullTextSearch fullTextSearch) {
+  }
+
   @SensitiveItemsFinderTransformed
   @Override
   public void visit(SignedExpression signedExpression) {
@@ -547,6 +556,10 @@ public class SensitiveItemsFinder implements SelectVisitor, FromItemVisitor, Exp
   @Override
   public void visit(IsNullExpression isNullExpression) {
     isNullExpression.getLeftExpression().accept(this);
+  }
+
+  @Override
+  public void visit(IsBooleanExpression isBooleanExpression) {
   }
 
   @Override
@@ -1057,7 +1070,7 @@ public class SensitiveItemsFinder implements SelectVisitor, FromItemVisitor, Exp
   }
 
   @Override
-  public void visit(ShowStatement set) {
+  public void visit(ShowColumnsStatement set) {
     throw new UnsupportedOperationException(NOT_SUPPORTED_STATEMENT_TYPE_YET);
   }
 
@@ -1195,5 +1208,25 @@ public class SensitiveItemsFinder implements SelectVisitor, FromItemVisitor, Exp
   public void visit(CollateExpression col) {
     throw new UnsupportedOperationException(Joiner.on(String0.COLON).join(NOT_SUPPORTED_EXPRESSION_YET, col));
 //    col.getLeftExpression().accept(this);
+  }
+
+  @Override
+  public void visit(ShowStatement aThis) {
+    throw new UnsupportedOperationException(NOT_SUPPORTED_STATEMENT_TYPE_YET);
+  }
+
+  @Override
+  public void visit(SimilarToExpression expr) {
+    visitBinaryExpression(expr);
+  }
+
+  @Override
+  public void visit(DeclareStatement aThis) {
+  }
+
+  @Override
+  public void visit(ArrayExpression array) {
+    array.getObjExpression().accept(this);
+    array.getIndexExpression().accept(this);
   }
 }
