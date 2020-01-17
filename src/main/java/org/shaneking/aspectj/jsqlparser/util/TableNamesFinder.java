@@ -32,7 +32,6 @@ import org.shaneking.skava.persistence.Tuple;
 import java.util.Set;
 
 public class TableNamesFinder implements SelectVisitor, FromItemVisitor, ExpressionVisitor, ItemsListVisitor, SelectItemVisitor, StatementVisitor {
-
   private static final String NOT_SUPPORTED_YET = "Not supported yet.";
   //Tuple.Pair<schema.table, alias>
   private Set<Tuple.Pair<String, String>> tables;
@@ -78,11 +77,9 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
         item.accept(this);
       }
     }
-
     if (plainSelect.getFromItem() != null) {
       plainSelect.getFromItem().accept(this);
     }
-
     if (plainSelect.getJoins() != null) {
       for (Join join : plainSelect.getJoins()) {
         join.getRightItem().accept(this);
@@ -91,11 +88,9 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
     if (plainSelect.getWhere() != null) {
       plainSelect.getWhere().accept(this);
     }
-
     if (plainSelect.getHaving() != null) {
       plainSelect.getHaving().accept(this);
     }
-
     if (plainSelect.getOracleHierarchical() != null) {
       plainSelect.getOracleHierarchical().accept(this);
     }
@@ -462,7 +457,6 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
     if (oexpr.getStartExpression() != null) {
       oexpr.getStartExpression().accept(this);
     }
-
     if (oexpr.getConnectExpression() != null) {
       oexpr.getConnectExpression().accept(this);
     }
@@ -505,7 +499,6 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
 
   @Override
   public void visit(NumericBind bind) {
-
   }
 
   @Override
@@ -530,7 +523,6 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
         join.getRightItem().accept(this);
       }
     }
-
     if (delete.getWhere() != null) {
       delete.getWhere().accept(this);
     }
@@ -549,17 +541,14 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
         expression.accept(this);
       }
     }
-
     if (update.getFromItem() != null) {
       update.getFromItem().accept(this);
     }
-
     if (update.getJoins() != null) {
       for (Join join : update.getJoins()) {
         join.getRightItem().accept(this);
       }
     }
-
     if (update.getWhere() != null) {
       update.getWhere().accept(this);
     }
@@ -651,7 +640,6 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
 
   @Override
   public void visit(HexValue hexValue) {
-
   }
 
   @Override
@@ -683,12 +671,10 @@ public class TableNamesFinder implements SelectVisitor, FromItemVisitor, Express
 
   @Override
   public void visit(DateTimeLiteralExpression literal) {
-
   }
 
   @Override
   public void visit(Commit commit) {
-
   }
 
   @Override

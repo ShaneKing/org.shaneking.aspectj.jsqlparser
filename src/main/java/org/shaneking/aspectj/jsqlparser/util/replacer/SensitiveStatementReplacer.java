@@ -8,7 +8,6 @@ import net.sf.jsqlparser.util.deparser.StatementDeParser;
 import org.shaneking.aspectj.jsqlparser.annotation.SensitiveExpressionReplacerPath;
 
 public class SensitiveStatementReplacer extends StatementDeParser {
-
   @Getter
   private ExpressionDeParser expressionReplacer;
 

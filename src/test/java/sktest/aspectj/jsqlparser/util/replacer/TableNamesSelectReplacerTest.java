@@ -32,5 +32,4 @@ public class TableNamesSelectReplacerTest extends SKUnit {
 //    System.out.println(sb);
     Assert.assertEquals("SELECT t.* FROM (select * from schema.table) t", sb.toString());
   }
-
 }

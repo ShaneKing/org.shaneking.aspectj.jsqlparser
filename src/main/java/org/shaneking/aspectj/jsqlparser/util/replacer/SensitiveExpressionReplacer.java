@@ -53,7 +53,6 @@ public class SensitiveExpressionReplacer extends ExpressionDeParser {
         tableName = table.getFullyQualifiedName();
       }
     }
-
 //    if (tableName != null && !tableName.isEmpty()) {
 //      buffer.append(tableName).append(".");
 //    }
@@ -63,7 +62,6 @@ public class SensitiveExpressionReplacer extends ExpressionDeParser {
     if (Strings.isNullOrEmpty(tableName)) {
       throw new UnsupportedOperationException(THE_COLUMN_MUST_BE_LIKE_X_Y);
     }
-
     String fullColumnName = tableName + String0.DOT + tableColumn.getColumnName();
     Tuple.Triple<Set<String>, String, String> replaceTuplePair = itemMap.get(fullColumnName.toLowerCase());
     if (replaceTuplePair != null && Tuple.getFirst(replaceTuplePair) != null && Tuple.getFirst(replaceTuplePair).contains(Joiner.on(String0.ARROW).join(pathStack))) {

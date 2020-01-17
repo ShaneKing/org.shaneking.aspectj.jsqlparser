@@ -40,5 +40,4 @@ public class SensitiveExpressionReplacerTest extends SKUnit {
 //    System.out.println(sb);
     Assert.assertEquals("SELECT hash(t.a) AS ta, t.* FROM (select * from schema.table) t", sb.toString());
   }
-
 }

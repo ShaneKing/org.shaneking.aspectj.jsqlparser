@@ -19,7 +19,6 @@ import java.util.Stack;
 
 @Aspect
 public class SensitiveExpressionReplacerAspect {
-
   @Pointcut("execution(@org.shaneking.aspectj.jsqlparser.annotation.SensitiveExpressionReplacerPath * *..*.*(..))")
   private void pointcut() {
   }

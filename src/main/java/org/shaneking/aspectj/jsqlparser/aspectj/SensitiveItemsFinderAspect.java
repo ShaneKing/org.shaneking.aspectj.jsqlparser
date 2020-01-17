@@ -20,7 +20,6 @@ import java.util.Set;
 
 @Aspect
 public class SensitiveItemsFinderAspect {
-
   @Pointcut("execution(@org.shaneking.aspectj.jsqlparser.annotation.SensitiveItemsFinderPath * *..*.*(..))")
   private void pointcut() {
   }
@@ -147,5 +146,4 @@ public class SensitiveItemsFinderAspect {
     }
     return result;
   }
-
 }

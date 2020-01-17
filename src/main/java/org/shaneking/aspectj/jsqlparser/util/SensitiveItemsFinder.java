@@ -96,7 +96,6 @@ import java.util.stream.Collectors;
  * TABLE [ ONLY ] table_name [ * ]
  */
 public class SensitiveItemsFinder implements SelectVisitor, FromItemVisitor, ExpressionVisitor, ItemsListVisitor, SelectItemVisitor, StatementVisitor {
-
   public static final String PATH_OF_FROM_ITEM = "FromItem";//LateralSubSelect|ParenthesisFromItem|SubJoin
   public static final String PATH_OF_INSERT = "Insert";
   public static final String PATH_OF_SELECT = "Select";
@@ -302,13 +301,11 @@ public class SensitiveItemsFinder implements SelectVisitor, FromItemVisitor, Exp
     if (plainSelect.getFromItem() != null) {
       plainSelect.getFromItem().accept(this);
     }
-
     if (plainSelect.getJoins() != null) {
       for (Join join : plainSelect.getJoins()) {
         join.getRightItem().accept(this);
       }
     }
-
     if (plainSelect.getSelectItems() != null) {
       for (SelectItem item : plainSelect.getSelectItems()) {
         item.accept(this);
@@ -343,7 +340,6 @@ public class SensitiveItemsFinder implements SelectVisitor, FromItemVisitor, Exp
     if (tableName.getAlias() != null && tableName.getAlias().getName() != null) {
       aliasTableName = tableName.getAlias().getName().toLowerCase();
     }
-
     Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>> realTableTuplePair = firstTuple(realTableName);
     if (realTableTuplePair == null) {
       if (itemMap.get(aliasTableName) == null) {
@@ -457,7 +453,6 @@ public class SensitiveItemsFinder implements SelectVisitor, FromItemVisitor, Exp
       aliasTableTuple = Tuple.of(Sets.newHashSet(aliasTableName), Maps.newHashMap());
       itemMap.put(aliasTableName, aliasTableTuple);
     }
-
     Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>> aliasColumnMap = Tuple.getSecond(aliasTableTuple);
     String columnName = tableColumn.getColumnName().toLowerCase();
     Set<Tuple.Quadruple<String, String, Set<String>, Boolean>> columnSet = aliasColumnMap.get(columnName);
@@ -869,7 +864,6 @@ public class SensitiveItemsFinder implements SelectVisitor, FromItemVisitor, Exp
     if (oexpr.getStartExpression() != null) {
       oexpr.getStartExpression().accept(this);
     }
-
     if (oexpr.getConnectExpression() != null) {
       oexpr.getConnectExpression().accept(this);
     }

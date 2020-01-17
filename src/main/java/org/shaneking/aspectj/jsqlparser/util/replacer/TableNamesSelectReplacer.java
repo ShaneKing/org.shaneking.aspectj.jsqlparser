@@ -13,7 +13,6 @@ import org.shaneking.aspectj.jsqlparser.annotation.SensitiveExpressionReplacerPa
 import java.util.Map;
 
 public class TableNamesSelectReplacer extends SelectDeParser {
-
   //Map<schema.table, (select * from schema.table where xxx in (...))>
   private Map<String, String> tableMap = Maps.newHashMap();
 
