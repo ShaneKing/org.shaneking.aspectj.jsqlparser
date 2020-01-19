@@ -30,8 +30,8 @@ ShaneKing is released under [Apache-2.0][].
 [travis]:https://travis-ci.org/ShaneKing/org.shaneking.aspectj.jsqlparser
 [travis img]:https://secure.travis-ci.org/ShaneKing/org.shaneking.aspectj.jsqlparser.png
 
-[codecov]:https://codecov.io/github/ShaneKing/org.shaneking.aspectj.jsqlparser?branch=master
-[codecov img]:https://codecov.io/github/ShaneKing/org.shaneking.aspectj.jsqlparser/coverage.svg?branch=master
+[codecov]:https://codecov.io/gh/ShaneKing/org.shaneking.aspectj.jsqlparser
+[codecov img]:https://codecov.io/gh/ShaneKing/org.shaneking.aspectj.jsqlparser/branch/master/graph/badge.svg
 [codacy]:https://www.codacy.com/app/ShaneKing/org.shaneking.aspectj.jsqlparser
 [codacy img]:https://api.codacy.com/project/badge/grade/f020f4e76254431f8035ed33625deb68
 
