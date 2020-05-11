@@ -15,8 +15,8 @@ import net.sf.jsqlparser.statement.update.Update;
 import net.sf.jsqlparser.statement.upsert.Upsert;
 import org.junit.Test;
 import org.shaneking.aspectj.jsqlparser.util.TableNamesFinder;
+import org.shaneking.aspectj.test.SKAspectJUnit;
 import org.shaneking.skava.persistence.Tuple;
-import sktest.aspectj.jsqlparser.SKUnit;
 
 import java.io.StringReader;
 import java.util.Set;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
-public class TableNamesFinderTest extends SKUnit {
+public class TableNamesFinderTest extends SKAspectJUnit {
   private static CCJSqlParserManager pm = new CCJSqlParserManager();
 
   @Test(expected = JSQLParserException.class)

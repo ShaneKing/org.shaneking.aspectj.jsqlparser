@@ -15,8 +15,8 @@ import net.sf.jsqlparser.statement.update.Update;
 import net.sf.jsqlparser.statement.upsert.Upsert;
 import org.junit.Test;
 import org.shaneking.aspectj.jsqlparser.util.SensitiveItemsFinder;
+import org.shaneking.aspectj.test.SKAspectJUnit;
 import org.shaneking.skava.persistence.Tuple;
-import sktest.aspectj.jsqlparser.SKUnit;
 
 import java.io.StringReader;
 import java.util.Map;
@@ -25,7 +25,7 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-public class SensitiveItemsFinderTest extends SKUnit {
+public class SensitiveItemsFinderTest extends SKAspectJUnit {
   private static CCJSqlParserManager pm = new CCJSqlParserManager();
 
   @Test

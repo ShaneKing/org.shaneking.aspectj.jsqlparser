@@ -11,25 +11,27 @@ import org.junit.Before;
 import org.junit.Test;
 import org.shaneking.aspectj.jsqlparser.util.SensitiveItemsFinder;
 import org.shaneking.aspectj.jsqlparser.util.replacer.SensitiveStatementReplacerFactory;
+import org.shaneking.aspectj.test.SKAspectJUnit;
 import org.shaneking.skava.lang.String0;
 import org.shaneking.skava.persistence.Tuple;
-import sktest.aspectj.jsqlparser.SKUnit;
 
 import java.util.Map;
 import java.util.Set;
 
-public class SensitiveExpressionReplacerTest extends SKUnit {
+public class SensitiveExpressionReplacerTest extends SKAspectJUnit {
   Map<String, Tuple.Triple<Set<String>, String, String>> itemMap = Maps.newHashMap();
   Map<String, String> tableMap = Maps.newHashMap();
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
+    super.setUp();
     itemMap.put("t.a", Tuple.of(Sets.newHashSet(Joiner.on(String0.ARROW).join(SensitiveItemsFinder.PATH_OF_SELECT, SensitiveItemsFinder.PATH_OF_SELECT_EXPRESSION_ITEM)), "hash(", ")"));
     tableMap.put("schema.table", "(select * from schema.table)");
   }
 
   @After
-  public void tearDown() throws Exception {
+  public void tearDown() {
+    super.tearDown();
   }
 
   @Test

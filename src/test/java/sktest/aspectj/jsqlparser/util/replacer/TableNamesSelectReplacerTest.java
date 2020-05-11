@@ -8,20 +8,22 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.shaneking.aspectj.jsqlparser.util.replacer.TableNamesStatementReplacerFactory;
-import sktest.aspectj.jsqlparser.SKUnit;
+import org.shaneking.aspectj.test.SKAspectJUnit;
 
 import java.util.Map;
 
-public class TableNamesSelectReplacerTest extends SKUnit {
+public class TableNamesSelectReplacerTest extends SKAspectJUnit {
   Map<String, String> tableMap = Maps.newHashMap();
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
+    super.setUp();
     tableMap.put("schema.table".toLowerCase(), "(select * from schema.table)");
   }
 
   @After
-  public void tearDown() throws Exception {
+  public void tearDown() {
+    super.tearDown();
   }
 
   @Test
