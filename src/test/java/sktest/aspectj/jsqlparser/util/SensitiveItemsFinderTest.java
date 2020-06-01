@@ -29,7 +29,7 @@ public class SensitiveItemsFinderTest extends SKAspectJUnit {
   private static CCJSqlParserManager pm = new CCJSqlParserManager();
 
   @Test
-  public void skTestSelectExpressionWith() throws Exception {
+  public void testSelectExpressionWith() throws Exception {
     String sql = "with a as (select c from t), b as (select * from a) select * from (with c as (select * from b), d as (select * from c) select * from d) t2";
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(CCJSqlParserUtil.parse(sql));
@@ -38,7 +38,7 @@ public class SensitiveItemsFinderTest extends SKAspectJUnit {
   }
 
   @Test
-  public void skTestSelectExpressionAlias() throws Exception {
+  public void testSelectExpressionAlias() throws Exception {
     String sql = "SELECT (select (select a.host1+b.host2+c.host3 as c3 from mysql.user c where c.user = a.user) as c2 from mysql.user b where b.user = a.user) as c1 FROM mysql.user a";
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(CCJSqlParserUtil.parse(sql));
@@ -48,7 +48,7 @@ public class SensitiveItemsFinderTest extends SKAspectJUnit {
 
   //TODO
   @Test
-  public void skTestSetOperationList() throws Exception {
+  public void testSetOperationList() throws Exception {
     String sql = "select sub(t.a,1,3) from (select tab1.a from tab1 union select tab2.m from tab2) t";
     SensitiveItemsFinder sensitiveItemsFinder = new SensitiveItemsFinder();
     Map<String, Tuple.Pair<Set<String>, Map<String, Set<Tuple.Quadruple<String, String, Set<String>, Boolean>>>>> itemMap = sensitiveItemsFinder.findItemMap(CCJSqlParserUtil.parse(sql));
