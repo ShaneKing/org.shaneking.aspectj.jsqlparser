@@ -3,7 +3,6 @@ package sktest.aspectj.jsqlparser.util.replacer;
 import com.google.common.collect.Maps;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.Statement;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,14 +15,8 @@ public class TableNamesSelectReplacerTest extends SKAspectJUnit {
   Map<String, String> tableMap = Maps.newHashMap();
 
   @Before
-  public void setUp() {
-    super.setUp();
+  public void tstSetUp() {
     tableMap.put("schema.table".toLowerCase(), "(select * from schema.table)");
-  }
-
-  @After
-  public void tearDown() {
-    super.tearDown();
   }
 
   @Test

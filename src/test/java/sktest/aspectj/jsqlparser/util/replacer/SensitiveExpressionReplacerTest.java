@@ -5,7 +5,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.Statement;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,15 +22,9 @@ public class SensitiveExpressionReplacerTest extends SKAspectJUnit {
   Map<String, String> tableMap = Maps.newHashMap();
 
   @Before
-  public void setUp() {
-    super.setUp();
+  public void tstSetUp() {
     itemMap.put("t.a", Tuple.of(Sets.newHashSet(Joiner.on(String0.ARROW).join(SensitiveItemsFinder.PATH_OF_SELECT, SensitiveItemsFinder.PATH_OF_SELECT_EXPRESSION_ITEM)), "hash(", ")"));
     tableMap.put("schema.table", "(select * from schema.table)");
-  }
-
-  @After
-  public void tearDown() {
-    super.tearDown();
   }
 
   @Test
