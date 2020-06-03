@@ -22,7 +22,7 @@ public class SensitiveExpressionReplacerTest extends SKAspectJUnit {
   Map<String, String> tableMap = Maps.newHashMap();
 
   @Before
-  public void tstSetUp() {
+  public void setUp() {
     itemMap.put("t.a", Tuple.of(Sets.newHashSet(Joiner.on(String0.ARROW).join(SensitiveItemsFinder.PATH_OF_SELECT, SensitiveItemsFinder.PATH_OF_SELECT_EXPRESSION_ITEM)), "hash(", ")"));
     tableMap.put("schema.table", "(select * from schema.table)");
   }
